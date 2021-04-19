@@ -1,8 +1,8 @@
 Yeah, bad apple in brainfuck.
 
-File is too big, therefore I cut it in 3 parts.
+File is too big, therefore I compressed it with tar.
 
-To put together do
+To put open do
 ```
- $ cat ba1 ba2 ba3 > bad_apple.bf
+ $ tar -xf bad_apple.tar.gz
 ```
