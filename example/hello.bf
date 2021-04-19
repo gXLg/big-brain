@@ -1,4 +1,4 @@
-[prints 'Hello World!\n']
+(prints 'Hello World!\n')
 ++++++++++
 [
   >+++++++
