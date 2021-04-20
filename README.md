@@ -6,6 +6,7 @@ This repository contains:
 * C translator to arm64 asm
 * a 'hello world' example
 * Bad Apple :)
+* Now a translator to C, written in brainfuck
 
 # Example
 
