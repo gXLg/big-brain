@@ -1,4 +1,9 @@
-#include <stdio.h>                                                                                                                                      const size_t f = 65536;                                                                                                                                 unsigned char game [ 2048 ] = { 0 };                                        unsigned char *ptr = game;
+#include <stdio.h>
+
+const size_t f = 65536;
+
+unsigned char game [ 2048 ] = { 0 };
+unsigned char *ptr = game;
 char file [ f ];
 
 int main ( int argc, char **argv ) {
