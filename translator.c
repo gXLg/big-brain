@@ -47,44 +47,27 @@ int main ( int argc, char **argv ) {
            ".text\n"
            ".global _start\n"
            "_start:\n"
-           "ldr x19, =ARRAY\n" );
+           "ldr x19, =ARRAY\n\n" );
 
-  char cond [ ] = { 0, 0, 0, 0 };
+  int cond = 0;
+  char cmd = ' ';
   char cmds [ ] = "<>+-";
   int loops = 0;
   char loops_ [ 256 ] = { 0 };
   int loaded = 0;
 
   char current_char;
-  char end = '#';
-  strncat ( file, &end, 1 );
   for ( int i = 0; file [ i ] != 0; i ++ ) {
     current_char = file [ i ];
-    int j = 0;
-    for ( int i = 0; i < 4; i ++ )
-      if ( cond [ i ]) {
-        j = 1;
-        break;
-      }
-    if ( j ) {
-      int index;
-      int value;
-      char cmd;
-      for ( int k = 0; k < 4; k ++ )
-        if ( cond [ k ]) {
-          index = k;
-          value = cond [ k ];
-          cmd = cmds [ k ];
-          break;
-        }
+    if ( cond ) {
       if ( ( current_char != cmd ) &&
-           strchr ( "<>+-.,[]", current_char )) {
+           ( strchr ( "<>+-.,[]", current_char ) || file [ i + 1 ] == 0 )) {
         if ( ( ! loaded ) && strchr ( "+-", cmd )) {
           printf ( "ldrb w20, [x19]\n" );
           loaded = 1;
         }
-        assembly ( cmd, value );
-        cond [ index ] = 0;
+        assembly ( cmd, cond );
+        cond = 0;
       }
     }
 
@@ -97,11 +80,8 @@ int main ( int argc, char **argv ) {
       loaded = 0;
 
     if ( strchr ( cmds, current_char )) {
-      for ( int k = 0; k < 4; k ++ )
-        if ( cmds [ k ] == current_char ) {
-          cond [ k ] ++;
-          break;
-        }
+      cond ++;
+      cmd = current_char;
     } else if ( strchr ( ",.", current_char ))
       assembly ( current_char, 0 );
     else if ( current_char == '[' ) {
@@ -123,6 +103,6 @@ int main ( int argc, char **argv ) {
       loops_ [ j ] = 0;
     }
   }
-  printf ( "mov x8, 93\nmov x0, 0\n"
+  printf ( "\nmov x8, 93\nmov x0, 0\n"
            "svc 0\n" );
 }
