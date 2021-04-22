@@ -44,24 +44,23 @@ END_%d:
 """ % ( value, value )
 
 # incptr, decptr, incval, decval
-cond = [ 0, 0, 0, 0 ]
-cmds = [ ">", "<", "+", "-" ]
+cmds = "><+-"
+cond = 0
+cmd = ""
+
 loops = 0
 loops_ = [ ]
 ldr = False
 programm = ""
-for char in file + "#" :
+for pos, char in enumerate ( file, 1 ) :
 
-  if any ( cond ) :
-    value = next ( i for i in cond if i )
-    index = cond.index ( value )
-    cmd = cmds [ index ]
-    if char != cmd and char in "<>+-.,[]" :
+  if cond :
+    if char != cmd and ( char in "<>+-.,[]" or pos == len ( file )):
       if not ldr and cmd in "+-" :
         programm += "ldrb w20, [x19]\n"
         ldr = True
-      programm += assembly ( cmd, value )
-      cond [ index ] = 0
+      programm += assembly ( cmd, cond )
+      cond = 0
 
   if char in "[]" :
     if not ldr :
@@ -70,7 +69,9 @@ for char in file + "#" :
   elif char in "<>," :
     ldr = False
 
-  if char in cmds : cond [ cmds.index ( char )] += 1
+  if char in cmds :
+    cond += 1
+    cmd = char
   elif char in ",." : programm += assembly ( char, 0 )
   elif char == "[" :
     loops += 1
