@@ -3,6 +3,39 @@ import sys
 try : file = open ( sys.argv [ 1 ], "r" ).read ( )
 except : exit ( "Error opening file" )
 
+file = "".join ([ i for i in file if i in "+-<>[].," ])
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "+-", "" )
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "-+", "" )
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "<>", "" )
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "><", "" )
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "+,", "," )
+
+x = 0
+while len ( file ) != x :
+  x = len ( file )
+  file = file.replace ( "-,", "" )
+
+
 def assembly ( cmd, value ) :
   if cmd == ">" :
     return """add x19, x19, %d
@@ -52,10 +85,12 @@ loops = 0
 loops_ = [ ]
 ldr = False
 programm = ""
+file += "#"
+
 for pos, char in enumerate ( file, 1 ) :
 
   if cond :
-    if char != cmd and ( char in "<>+-.,[]" or pos == len ( file )):
+    if char != cmd :
       if not ldr and cmd in "+-" :
         programm += "ldrb w20, [x19]\n"
         ldr = True
