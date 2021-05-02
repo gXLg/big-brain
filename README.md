@@ -1,8 +1,11 @@
 # Big Brain
 
+With arm64 I mean both arm and aarch.
+
 This repository contains:
 * simple C interpreter
 * Python3 translator to arm64 asm
+* new: Python compiler to arm64 ELF file
 * C translator to arm64 asm
 * a 'hello world' example
 * Bad Apple :)
@@ -70,6 +73,16 @@ C (faster and compiled):
  $ as hello.s -o hello.o
  $ ld hello.o -o hello
  $ ./hello
+Hello World!
+ $
+```
+
+New: compiled directly to machine code, using Python3
+(and without external modules):
+```
+ $ python3 compiler.py hello.bf
+ $ chmod +x a.out
+ $ ./a.out
 Hello World!
  $
 ```
