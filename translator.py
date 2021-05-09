@@ -8,32 +8,12 @@ file = "".join ([ i for i in file if i in "+-<>[].," ])
 x = 0
 while len ( file ) != x :
   x = len ( file )
-  file = file.replace ( "+-", "" )
-
-x = 0
-while len ( file ) != x :
-  x = len ( file )
-  file = file.replace ( "-+", "" )
-
-x = 0
-while len ( file ) != x :
-  x = len ( file )
-  file = file.replace ( "<>", "" )
-
-x = 0
-while len ( file ) != x :
-  x = len ( file )
-  file = file.replace ( "><", "" )
-
-x = 0
-while len ( file ) != x :
-  x = len ( file )
-  file = file.replace ( "+,", "," )
-
-x = 0
-while len ( file ) != x :
-  x = len ( file )
-  file = file.replace ( "-,", "" )
+  file = file.replace ( "+-", ""
+  ).replace ( "-+", ""
+  ).replace ( "<>", ""
+  ).replace ( "><", ""
+  ).replace ( "+,", ","
+  ).replace ( "-,", "" )
 
 
 def assembly ( cmd, value ) :
