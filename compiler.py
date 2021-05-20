@@ -17,22 +17,22 @@ while len ( file ) != x :
 
 def assembly ( cmd, value ) :
   if cmd == ">" :
-    val = bin ( value ).split ( "b" ) [ 1 ] + "1001110011"
+    val = bin ( value ) [ 2 : ] + "1001110011"
     val = hex ( int ( val, 2 ) + 0x91000000 ) [ 2 : ]
     val = " ".join ( [ val [ i : i + 2 ] for i in [ 6, 4, 2, 0 ]])
     return [ val, 0 ]
   elif cmd == "<" :
-    val = bin ( value ).split ( "b" ) [ 1 ] + "1001110011"
+    val = bin ( value ) [ 2 : ] + "1001110011"
     val = hex ( int ( val, 2 ) + 0xd1000000 ) [ 2 : ]
     val = " ".join ( [ val [ i : i + 2 ] for i in [ 6, 4, 2, 0 ]])
     return [ val, 0 ]
   elif cmd == "+" :
-    val = bin ( value ).split ( "b" ) [ 1 ] + "1010010100"
+    val = bin ( value ) [ 2 : ] + "1010010100"
     val = hex ( int ( val, 2 ) + 0x11000000 ) [ 2 : ]
     val = " ".join ( [ val [ i : i + 2 ] for i in [ 6, 4, 2, 0 ]])
     return [ val + " 74 02 00 39", 0 ]
   elif cmd == "-" :
-    val = bin ( value ).split ( "b" ) [ 1 ] + "1010010100"
+    val = bin ( value ) [ 2 : ] + "1010010100"
     val = hex ( int ( val, 2 ) + 0x51000000 ) [ 2 : ]
     val = " ".join ( [ val [ i : i + 2 ] for i in [ 6, 4, 2, 0 ]])
     return [ val + " 74 02 00 39", 0 ]
