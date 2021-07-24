@@ -1,6 +1,3 @@
-![logo](https://user-images.githubusercontent.com/65429873/126862690-f4cf02d8-127a-4513-83ea-69b99a333d44.jpg)
-
-
 # Big Brain
 
 With arm64 I mean both arm and aarch.
