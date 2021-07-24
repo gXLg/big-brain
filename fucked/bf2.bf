@@ -1,4 +1,4 @@
-Brainfuck compiler to python written in brainfuck ;)
+Brainfuck transpiler to python written in brainfuck ;)
 Actually I could add some minor improvements
 Reads from stdin until "#"
 
